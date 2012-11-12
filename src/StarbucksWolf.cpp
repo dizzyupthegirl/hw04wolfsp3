@@ -9,36 +9,10 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-StarbucksWolf::StarbucksWolf() {
-	ifstream in("../../../Resources/Starbucks_2006.csv");
-	vector <Entry> stored_v;
-	string line;
-	double i_;
-	double j_;
-	char separator;
-	int x = 0;
 
-	//I was so lost on this part, I'm still not sure exactly how this reads in the code...
-	while(in.good()) {
-		Entry* e = new Entry();
-		stored_v.push_back(*e);
-		getline(in, line, ',');
 
-		stored_v[x].identifier = line;
-		in >> i_;
-		stored_v[x].x = i_;
-		in >> separator;//Sam, this is a comma....
-		in >> j_;
-		stored_v[x].y = j_;
-		x++;
-	}
+	
 
-	Entry* stored_a = new Entry[stored_v.size()];
-
-	for(int i = 0; i < stored_v.size(); i++)
-		stored_a[i] = stored_v[i];
-	build(stored_a, stored_v.size());
-}
 
 
 void StarbucksWolf::build(Entry* c, int n) {

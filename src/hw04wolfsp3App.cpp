@@ -19,6 +19,7 @@ class hw04wolfsp3App : public AppBasic {
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
+	pair<Entry*, int> getStarbucksData();
 	
 
 private:
@@ -37,8 +38,41 @@ void hw04wolfsp3App::prepareSettings(Settings* settings)
 	(*settings).setResizable(false);
 }
 
+//Brandon Shenanigan's
+pair<Entry*, int> hw04wolfsp3App::getStarbucksData() {
+	ifstream in("Starbucks_2006.csv");
+	vector <Entry> stored_v;
+	string line;
+	double i_;
+	double j_;
+	char separator;
+	int x = 0;
+
+	//I was so lost on this part, I'm still not sure exactly how this reads in the code...
+	while(in.good()) {
+		Entry* e = new Entry();
+		stored_v.push_back(*e);
+		getline(in, line, ',');
+
+		stored_v[x].identifier = line;
+		in >> i_;
+		stored_v[x].x = i_;
+		in >> separator;//Sam, this is a comma....
+		in >> j_;
+		stored_v[x].y = j_;
+		x++;
+	}
+	Entry* stored_a = new Entry[stored_v.size()];
+
+	for(int i = 0; i < stored_v.size(); i++)
+		stored_a[i] = stored_v[i];
+	return std::make_pair(stored_a, x);
+}
+
 void hw04wolfsp3App::setup()
+
 {
+
 	//Attemps to test, but won't print to console for some dumb reason. 
 	mySurface_ = new Surface(texture, texture, false);
 	starbucks_ = new StarbucksWolf();
@@ -54,6 +88,10 @@ void hw04wolfsp3App::setup()
 	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y<< std::endl;
 	cur_entry = starbucks_->getNearest(0.5, 0.5);
 	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y<< std::endl;
+	
+	//Brandon Sonoda, you're a genius.
+	pair<Entry*, int> smd = getStarbucksData();
+	starbucks_->build(smd.first, smd.second);
 	
 }
 
