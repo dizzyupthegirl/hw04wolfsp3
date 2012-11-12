@@ -8,7 +8,6 @@ using namespace std;
 class StarbucksWolf : public Starbucks
 {
 public:
-	StarbucksWolf();
 	~StarbucksWolf(void);
 
 	Node* root;
