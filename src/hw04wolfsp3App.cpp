@@ -73,26 +73,16 @@ void hw04wolfsp3App::setup()
 
 {
 
-	//Attemps to test, but won't print to console for some dumb reason. 
+	//Attempts to test, but won't print to console for some dumb reason. 
 	mySurface_ = new Surface(texture, texture, false);
 	starbucks_ = new StarbucksWolf();
-	Entry* cur_entry = starbucks_->getNearest(0.0, 0.0);
-	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y << std::endl;
-	cur_entry = starbucks_->getNearest(0.1, 0.1);
-	console() << "Starbucks:" << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y<< std::endl;
-	cur_entry = starbucks_->getNearest(0.2, 0.2);
-	console() << "Starbucks:" << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y<< std::endl;
-	cur_entry = starbucks_->getNearest(0.3, 0.3);
-	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y<< std::endl;
-	cur_entry = starbucks_->getNearest(0.4, 0.4);
-	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y<< std::endl;
-	cur_entry = starbucks_->getNearest(0.5, 0.5);
-	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y<< std::endl;
-	
+
 	//Brandon Sonoda, you're a genius.
 	pair<Entry*, int> smd = getStarbucksData();
 	starbucks_->build(smd.first, smd.second);
-	
+
+	Entry* cur_entry = starbucks_->getNearest(0.0, 0.0);
+	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y << std::endl;
 }
 
 

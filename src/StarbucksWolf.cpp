@@ -22,8 +22,8 @@ void StarbucksWolf::build(Entry* c, int n) {
 		stored_v.push_back(c[i]); 
 
 	// Check for duplicates as defined in class
-	for(int j = 0; j < stored_v.size(); j++) {
-		for(int k = j + 1; k < stored_v.size(); k++) {
+	for(int j = 0; j < (int)stored_v.size(); j++) {
+		for(int k = j + 1; k < (int)stored_v.size(); k++) {
 			if(abs(stored_v[j].x - stored_v[k].x) <= 0.00001) {
 				if(abs(stored_v[j].y - stored_v[k].y) <= 0.00001)
 					stored_v.erase(stored_v.begin() + j);
@@ -36,10 +36,10 @@ void StarbucksWolf::build(Entry* c, int n) {
 	std::random_shuffle(stored_v.begin(), stored_v.end());
 
 	Entry* stored_a = new Entry[stored_v.size()];
-	for(int y = 0; y < stored_v.size(); y++)
+	for(int y = 0; y < (int)stored_v.size(); y++)
 		stored_a[y] = stored_v[y];
 	Node* r = NULL;
-	for(int i = 0; i < stored_v.size(); i++){
+	for(int i = 0; i < (int)stored_v.size(); i++){
 	
 		if(i == 0) {
 			r = r->insert(&stored_a[i], r, true);
