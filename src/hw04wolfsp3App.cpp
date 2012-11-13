@@ -15,7 +15,8 @@ using namespace std;
 class hw04wolfsp3App : public AppBasic {
   public:
 	void setup();
-	void mouseDown( MouseEvent event );	
+	void mouseDown( MouseEvent event);	
+	void keyDown(KeyEvent event); 
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
@@ -27,8 +28,9 @@ private:
 	
 	StarbucksWolf* starbucks_;
 	Surface* mySurface_;
-	//gl::Texture map;
-
+	gl::Texture map;
+	bool click;
+	float circ_x, circ_y;
 	static const int appHeight = 700;
 	static const int appWidth = 700;
 	static const int texture = 1024;
@@ -78,7 +80,8 @@ void hw04wolfsp3App::setup()
 	//Attempts to test, but won't print to console for some dumb reason. 
 	mySurface_ = new Surface(texture, texture, false);
 	starbucks_ = new StarbucksWolf();
-	//map = gl::Texture(loadImage("usamap.png"));
+	map = gl::Texture(loadImage("usa3.png"));
+	click=true;
 	//Brandon Sonoda, you're a genius.
 	pair<Entry*, int> smd = getStarbucksData();
 	starbucks_->build(smd.first, smd.second);
@@ -105,19 +108,38 @@ void hw04wolfsp3App::displayStarbucks(Node* root, uint8_t* pixelData) {
     displayStarbucks(root->right, pixelData);
 	
 }
-
+void hw04wolfsp3App::keyDown( KeyEvent event)
+{
+		click=!click;
+}
 
 void hw04wolfsp3App::mouseDown( MouseEvent event )
 {
+	double x=1.0*event.getX()/700;
+	double y=1.0-1.0*event.getY()/700;
+	Entry* closestStarbucks=starbucks_->getNearest(x,y);
+	circ_x=700*closestStarbucks->x;
+	circ_y=700-700*closestStarbucks->y;
+
 }
+
+
 
 void hw04wolfsp3App::update() {
 }
 
 void hw04wolfsp3App::draw() {
 	// clear out the window with black
-	gl::draw(*mySurface_); 
-	//gl::draw(map, getWindowBounds());
+	if(click==true) {
+		gl::draw(*mySurface_); 
+	
+	}
+	else {
+	gl::draw(map, getWindowBounds());
+
+	}
+	gl::drawSolidCircle( Vec2f( circ_x, circ_y), 3.0f);
+
 }
 
 
