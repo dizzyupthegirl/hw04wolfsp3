@@ -4,6 +4,8 @@ Node::Node(Entry* e) {
 	key = e;
 	left = NULL;
 	right = NULL;
+	population=NULL;
+	
 }
 
 

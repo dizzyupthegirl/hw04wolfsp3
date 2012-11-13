@@ -1,6 +1,7 @@
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
 #include "StarbucksWolf.h"
+#include
 #include "Node.h"
 #include <fstream>
 #include <iostream>
@@ -9,10 +10,8 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-
-
 void StarbucksWolf::build(Entry* c, int n) {
-	vector<Entry> stored_v;
+	vector<EntryWolf> stored_v;
 
 	for(int i = 0; i < n; i++)
 		stored_v.push_back(c[i]); 

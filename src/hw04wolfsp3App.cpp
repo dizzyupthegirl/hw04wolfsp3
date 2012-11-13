@@ -2,6 +2,7 @@
 #include "cinder/gl/gl.h"
 #include "Starbucks.h"
 #include "StarbucksWolf.h"
+#include "
 #include "cinder/gl/Texture.h"
 #include <iostream>
 #include <fstream>
@@ -12,6 +13,10 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
+static const int appHeight = 700;
+static const int appWidth = 700;
+static const int texture = 1024;
+
 class hw04wolfsp3App : public AppBasic {
   public:
 	void setup();
@@ -21,8 +26,9 @@ class hw04wolfsp3App : public AppBasic {
 	void draw();
 	void prepareSettings(Settings* settings);
 	pair<Entry*, int> getStarbucksData();
+	void getCensusData();
 	void displayStarbucks(Node* e, uint8_t* pixelData); 
-
+	void createNearestMap(Node* e, uint8_t* pixelData);
 
 private:
 	
@@ -31,9 +37,7 @@ private:
 	gl::Texture map;
 	bool click;
 	float circ_x, circ_y;
-	static const int appHeight = 700;
-	static const int appWidth = 700;
-	static const int texture = 1024;
+
 };
 
 void hw04wolfsp3App::prepareSettings(Settings* settings)
@@ -73,6 +77,36 @@ pair<Entry*, int> hw04wolfsp3App::getStarbucksData() {
 	return std::make_pair(stored_a, x);
 }
 
+void hw04wolfsp3App::getCensusData() {
+	int buffer;
+	ifstream cen1("Census_2000.csv");
+
+	int pop;
+	double x, y;
+	Entry* close;
+	while(cen1.good()){
+		cen1 >> buffer;
+        cen1.get();
+        cen1 >> buffer;
+        cen1.get();
+        cen1 >> buffer;
+        cen1.get();
+        cen1 >> buffer;
+        cen1.get();
+		cen1 >> pop;
+		cen1.get();
+		cen1 >> x;
+		cen1.get();
+		cen1 >> y;
+
+		close = starbucks_->getNearest(x, y);
+		//close->population = pop;
+	}
+
+	cen1.close();
+}
+
+
 void hw04wolfsp3App::setup()
 
 {
@@ -107,6 +141,24 @@ void hw04wolfsp3App::displayStarbucks(Node* root, uint8_t* pixelData) {
     } 
     displayStarbucks(root->right, pixelData);
 	
+}
+void createNearestMap(Node* root, uint8_t* pixelData) {
+	if(root==NULL)
+		return;
+	for(int x=0; x< appWidth; x++) {
+ 		for(int y=appHeight; y<(appHeight/4*3); y++) {
+			pixelData[y*appWidth+x] = root->r;
+			pixelData[y*appWidth+x+1] = root->g;
+			pixelData[y*appWidth+x+2] = root->b;
+ 			}
+ 		}
+ 	}
+
+        
+    } 
+    displayStarbucks(root->right, pixelData);
+
+
 }
 void hw04wolfsp3App::keyDown( KeyEvent event)
 {

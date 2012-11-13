@@ -114,6 +114,7 @@
     <ClInclude Include="..\include\Starbucks.h" />
     <ClInclude Include="..\include\StarbucksWolf.h" />
     <ClInclude Include="..\include\Tree.h" />
+    <ClInclude Include="EntryWolf.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc" />
