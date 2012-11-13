@@ -22,10 +22,12 @@ class hw04wolfsp3App : public AppBasic {
 	pair<Entry*, int> getStarbucksData();
 	void displayStarbucks(Node* e, uint8_t* pixelData); 
 
+
 private:
 	
 	StarbucksWolf* starbucks_;
 	Surface* mySurface_;
+	//gl::Texture map;
 
 	static const int appHeight = 700;
 	static const int appWidth = 700;
@@ -76,7 +78,7 @@ void hw04wolfsp3App::setup()
 	//Attempts to test, but won't print to console for some dumb reason. 
 	mySurface_ = new Surface(texture, texture, false);
 	starbucks_ = new StarbucksWolf();
-
+	//map = gl::Texture(loadImage("usamap.png"));
 	//Brandon Sonoda, you're a genius.
 	pair<Entry*, int> smd = getStarbucksData();
 	starbucks_->build(smd.first, smd.second);
@@ -115,6 +117,7 @@ void hw04wolfsp3App::update() {
 void hw04wolfsp3App::draw() {
 	// clear out the window with black
 	gl::draw(*mySurface_); 
+	//gl::draw(map, getWindowBounds());
 }
 
 
