@@ -20,15 +20,15 @@ class hw04wolfsp3App : public AppBasic {
 	void draw();
 	void prepareSettings(Settings* settings);
 	pair<Entry*, int> getStarbucksData();
-	
+	void displayStarbucks(Node* e, uint8_t* pixelData); 
 
 private:
 	
 	StarbucksWolf* starbucks_;
 	Surface* mySurface_;
 
-	static const int appHeight = 600;
-	static const int appWidth = 600;
+	static const int appHeight = 700;
+	static const int appWidth = 700;
 	static const int texture = 1024;
 };
 
@@ -83,6 +83,25 @@ void hw04wolfsp3App::setup()
 
 	Entry* cur_entry = starbucks_->getNearest(0.0, 0.0);
 	console() << "Starbucks: " << cur_entry->identifier << ", X = " << cur_entry->x << ", Y = " << cur_entry->y << std::endl;
+	displayStarbucks(starbucks_->root, (*mySurface_).getData());
+}
+
+void hw04wolfsp3App::displayStarbucks(Node* root, uint8_t* pixelData) {
+	
+	if(root==NULL)
+		return;
+	 displayStarbucks(root->left, pixelData);
+    
+    int tempX = (int)(appWidth*(root->key->x));
+    int tempY = appHeight-(int)(appHeight*(root->key->y));
+    int index = 3*(tempY*texture+tempX);
+    if(index>=0 && index < texture*texture*3){
+        pixelData[index] = rand()%256;
+        pixelData[index+1] = rand()%256;
+        pixelData[index+2] = rand()%256;
+    } 
+    displayStarbucks(root->right, pixelData);
+	
 }
 
 

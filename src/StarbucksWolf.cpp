@@ -11,10 +11,6 @@ using namespace std;
 
 
 
-	
-
-
-
 void StarbucksWolf::build(Entry* c, int n) {
 	vector<Entry> stored_v;
 
