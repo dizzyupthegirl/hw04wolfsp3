@@ -2,7 +2,6 @@
 #include "cinder/gl/gl.h"
 #include "Starbucks.h"
 #include "StarbucksWolf.h"
-#include "
 #include "cinder/gl/Texture.h"
 #include <iostream>
 #include <fstream>
@@ -77,7 +76,7 @@ pair<Entry*, int> hw04wolfsp3App::getStarbucksData() {
 	return std::make_pair(stored_a, x);
 }
 
-void hw04wolfsp3App::getCensusData() {
+/*void hw04wolfsp3App::getCensusData() {
 	int buffer;
 	ifstream cen1("Census_2000.csv");
 
@@ -106,7 +105,7 @@ void hw04wolfsp3App::getCensusData() {
 	cen1.close();
 }
 
-
+*/
 void hw04wolfsp3App::setup()
 
 {
@@ -142,24 +141,24 @@ void hw04wolfsp3App::displayStarbucks(Node* root, uint8_t* pixelData) {
     displayStarbucks(root->right, pixelData);
 	
 }
-void createNearestMap(Node* root, uint8_t* pixelData) {
-	if(root==NULL)
-		return;
+/*void createNearestMap(Node* root, uint8_t* pixelData) {
+	
 	for(int x=0; x< appWidth; x++) {
- 		for(int y=appHeight; y<(appHeight/4*3); y++) {
+ 		for(int y=0; y<appHeight; y++) {
 			pixelData[y*appWidth+x] = root->r;
 			pixelData[y*appWidth+x+1] = root->g;
 			pixelData[y*appWidth+x+2] = root->b;
  			}
  		}
- 	}
+ 	
 
-        
-    } 
+	
+
     displayStarbucks(root->right, pixelData);
 
 
 }
+*/
 void hw04wolfsp3App::keyDown( KeyEvent event)
 {
 		click=!click;

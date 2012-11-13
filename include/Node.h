@@ -19,4 +19,5 @@ public:
 	Node* lastNode;
 	Node* parent;
 	int population;
+	int r,g,b;
 };
