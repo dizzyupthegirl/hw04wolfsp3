@@ -1,3 +1,11 @@
+/*
+Name: Samantha Wolf
+Date:November 5h, 2012
+Citations: Brandon Sonoda, Nick Collins, and Matt Dwyer helped with 
+reading in files(I didn't get it) and Brandon specifically showed me the pairs thing.
+*/
+
+
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
 #include "Starbucks.h"
